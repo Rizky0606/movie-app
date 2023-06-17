@@ -1,24 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import Home from "./components/Home";
+import PopularityMovie from "./source/PopularityMovie";
+import NowPlaying from "./source/NowPlaying";
+import Upcoming from "./source/Upcoming";
+import DetailMovies from "./source/DetailMovies";
+// import SearchMovie from "./source/SearchMovie";
+import NotFound from "./source/NotFound";
+import { Routes, Route } from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.css";
+import * as React from "react";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Routes>
+      <Route path="/">
+        <Route index element={<Home />} />
+        <Route path="popular-movie" element={<PopularityMovie />} />
+        <Route path="now-playing" element={<NowPlaying />} />
+        <Route path="upcoming" element={<Upcoming />} />
+        <Route path="detail-movies/:id" element={<DetailMovies />} />
+        {/* <Route path="search-movie" element={<SearchMovie />} /> */}
+        <Route path="*" element={<NotFound />} />
+      </Route>
+      <Route path="*" element={<NotFound />} />
+    </Routes>
   );
 }
 
