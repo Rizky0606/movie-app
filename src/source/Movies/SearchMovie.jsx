@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Spinner } from "@chakra-ui/react";
 import { StarIcon } from "@chakra-ui/icons";
+import { Link } from "react-router-dom";
 import {
   Card,
   Container,
@@ -15,31 +16,32 @@ import {
   CardFooter,
   SimpleGrid,
 } from "@chakra-ui/react";
-import NavbarWeb from "../components/Navbar";
-import { Link } from "react-router-dom";
+import NavbarWeb from "../../components/Navbar";
 
-const PopularityMovie = () => {
-  const fetch = require("node-fetch");
-  const [data, setData] = useState();
+const SearchMovie = ({ keyword }) => {
   const [loading, setLoading] = useState(true);
+  const [data, setData] = useState();
 
-  const url =
-    "https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc";
-  const options = {
-    method: "GET",
-    headers: {
-      accept: "application/json",
-      Authorization: process.env.REACT_APP_AUTHORIZATION,
-    },
-  };
+  if (keyword > 1) {
+    const url = `https://api.themoviedb.org/3/search/movie?query=${keyword}&include_adult=false&language=en-US&page=1`;
+    const options = {
+      method: "GET",
+      headers: {
+        accept: "application/json",
+        Authorization: process.env.AUTHORIZATION,
+      },
+    };
 
-  fetch(url, options)
-    .then((res) => res.json())
-    .then((json) => {
-      setData(json.results);
-      setLoading(false);
-    })
-    .catch((err) => console.error("error:" + err));
+    fetch(url, options)
+      .then((res) => res.json())
+      .then((json) => {
+        setData(json.results);
+        setLoading(false);
+      })
+      .catch((err) => console.error("error:" + err));
+  } else {
+    return <h1>Masukan Keyword Movie</h1>;
+  }
 
   return (
     <>
@@ -92,4 +94,4 @@ const PopularityMovie = () => {
   );
 };
 
-export default PopularityMovie;
+export default SearchMovie;

@@ -1,17 +1,18 @@
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { Input } from "@chakra-ui/react";
-import { Search2Icon } from "@chakra-ui/icons";
-import SearchMovie from "../source/SearchMovie";
+import NavDropdown from "react-bootstrap/NavDropdown";
+import { Link } from "react-router-dom";
+// import { useState } from "react";
+// import { Input } from "@chakra-ui/react";
+// import { Search2Icon } from "@chakra-ui/icons";
+// import SearchMovie from "../source/Movies/SearchMovie";
 
 const NavbarWeb = () => {
-  const navigate = useNavigate();
-  const [keyword, setKeyword] = useState("");
+  // const navigate = useNavigate();
+  // const [keyword, setKeyword] = useState("");
 
-  SearchMovie(keyword);
+  // SearchMovie(keyword);
   return (
     <>
       <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
@@ -25,17 +26,36 @@ const NavbarWeb = () => {
               <Nav.Link>
                 <Link to="/">Home</Link>
               </Nav.Link>
-              <Nav.Link>
-                <Link to="/popular-movie">Popular</Link>
-              </Nav.Link>
-              <Nav.Link>
-                <Link to="/now-playing">Now Playing</Link>
-              </Nav.Link>
-              <Nav.Link>
-                <Link to="/upcoming">Upcoming</Link>
-              </Nav.Link>
+              {/* Dropdown Movies */}
+              <NavDropdown title="Movies" id="basic-nav-dropdown">
+                <NavDropdown.Item>
+                  <Link to="/movie/now-playing">Now Playing</Link>
+                </NavDropdown.Item>
+                <NavDropdown.Item>
+                  <Link to="/movie/popular-movies">Popular</Link>
+                </NavDropdown.Item>
+                <NavDropdown.Item>
+                  <Link to="/movie/upcoming-movies">Upcoming</Link>
+                </NavDropdown.Item>
+                <NavDropdown.Item>
+                  <Link to="/movie/trending-movies">Trending</Link>
+                </NavDropdown.Item>
+              </NavDropdown>
+
+              {/* Dropdown Series */}
+              <NavDropdown title="Series" id="basic-nav-dropdown">
+                <NavDropdown.Item>
+                  <Link to="/series/popular-series">Popular</Link>
+                </NavDropdown.Item>
+                <NavDropdown.Item>
+                  <Link to="/series/top-rated">Top Rated</Link>
+                </NavDropdown.Item>
+                <NavDropdown.Item>
+                  <Link to="/series/on-the-air">On The Air</Link>
+                </NavDropdown.Item>
+              </NavDropdown>
             </Nav>
-            <Input
+            {/* <Input
               color="white"
               w="30%"
               ml="30px"
@@ -48,7 +68,7 @@ const NavbarWeb = () => {
               boxSize={5}
               ml="10px"
               onClick={() => navigate("/search-movie")}
-            />
+            /> */}
           </Navbar.Collapse>
         </Container>
       </Navbar>

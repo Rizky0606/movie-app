@@ -11,15 +11,16 @@ import {
   Text,
   CardBody,
 } from "@chakra-ui/react";
-import NavbarWeb from "../components/Navbar";
+import NavbarWeb from "../../components/Navbar";
 
-const DetailMovies = () => {
+const DetailSeries = () => {
   const params = useParams();
   const [data, setData] = useState();
   const [loading, setLoading] = useState(true);
   const apiKey = process.env.REACT_APP_API_KEY;
   const navigate = useNavigate();
 
+  const url = `https://api.themoviedb.org/3/tv/${params.id}?api_key=${apiKey}`;
   const options = {
     method: "GET",
     headers: {
@@ -28,10 +29,7 @@ const DetailMovies = () => {
     },
   };
 
-  fetch(
-    `https://api.themoviedb.org/3/movie/${params.id}?api_key=${apiKey}`,
-    options
-  )
+  fetch(url, options)
     .then((res) => res.json())
     .then((json) => {
       setData(json);
@@ -65,11 +63,11 @@ const DetailMovies = () => {
                   w="100%"
                   objectFit="cover"
                   src={`https://image.tmdb.org/t/p/w780/${data.backdrop_path}`}
-                  alt={data.original_title}
+                  alt={data.name}
                   borderRadius="lg"
                 />
                 <Stack mt="6" spacing="3">
-                  <Heading size="md">{data.title}</Heading>
+                  <Heading size="md">{data.name}</Heading>
                   <Text color="blue.600" fontSize="2xl">
                     <StarIcon boxSize={5} mr={2} />
                     {data.vote_average}
@@ -87,4 +85,4 @@ const DetailMovies = () => {
   );
 };
 
-export default DetailMovies;
+export default DetailSeries;
