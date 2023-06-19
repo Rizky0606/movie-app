@@ -36,7 +36,7 @@ const Home = () => {
         <>
           <Carousel>
             <Carousel.Item interval={1000}>
-              <Link to={`/detail-movies/${data[0].id}`}>
+              <Link to={`/movie/detail-movies/${data[0].id}`}>
                 <img
                   className="d-block w-100 height-50"
                   src={`https://image.tmdb.org/t/p/w780/${data[0].backdrop_path}`}
@@ -53,7 +53,7 @@ const Home = () => {
             </Carousel.Item>
 
             <Carousel.Item interval={500}>
-              <Link to={`/detail-movies/${data[1].id}`}>
+              <Link to={`/movie/detail-movies/${data[1].id}`}>
                 <img
                   className="d-block w-100 h-50"
                   src={`https://image.tmdb.org/t/p/w780/${data[1].backdrop_path}`}
@@ -70,7 +70,7 @@ const Home = () => {
             </Carousel.Item>
 
             <Carousel.Item>
-              <Link to={`/detail-movies/${data[2].id}`}>
+              <Link to={`/movie/detail-movies/${data[2].id}`}>
                 <img
                   className="d-block w-100 h-50"
                   src={`https://image.tmdb.org/t/p/w780/${data[2].backdrop_path}`}
