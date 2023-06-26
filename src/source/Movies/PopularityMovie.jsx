@@ -18,7 +18,6 @@ import NavbarWeb from "../../components/Navbar";
 import { Link } from "react-router-dom";
 
 const PopularityMovie = () => {
-  const fetch = require("node-fetch");
   const [data, setData] = useState();
   const [loading, setLoading] = useState(true);
 
@@ -57,16 +56,16 @@ const PopularityMovie = () => {
             >
               {data.map((movie, index) => {
                 return (
-                  <Card maxW="sm" key={index} bg="gray.200" mt="20px">
+                  <Card maxW="sm" key={index} bg="#63646D" mt="20px">
                     <Image
                       src={`https://image.tmdb.org/t/p/w780/${movie.poster_path}`}
                       alt={movie.title}
                       borderRadius="lg"
                     />
-                    <Stack p="10px" mt="6" spacing="3">
+                    <Stack color="#eee" p="10px" mt="6" spacing="3">
                       <Heading size="md">{movie.title}</Heading>
                       <Text noOfLines={4}>{movie.overview}</Text>
-                      <Text color="blue.600" fontSize="2xl">
+                      <Text fontSize="2xl">
                         <StarIcon boxSize={5} mr={2} />
                         {movie.vote_average}
                       </Text>

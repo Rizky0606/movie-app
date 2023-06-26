@@ -21,14 +21,15 @@ import NavbarWeb from "../../components/Navbar";
 const SearchMovie = ({ keyword }) => {
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState();
+  const apiKey = process.env.REACT_APP_API_KEY;
 
   if (keyword > 1) {
-    const url = `https://api.themoviedb.org/3/search/movie?query=${keyword}&include_adult=false&language=en-US&page=1`;
+    const url = `https://api.themoviedb.org/3/search/movie?query=${keyword}&api_key=${apiKey}&include_adult=false&language=en-US&page=1`;
     const options = {
       method: "GET",
       headers: {
         accept: "application/json",
-        Authorization: process.env.AUTHORIZATION,
+        Authorization: process.env.REACT_APP_AUTHORIZATION,
       },
     };
 

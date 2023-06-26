@@ -1,7 +1,7 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
-import { Spinner } from "@chakra-ui/react";
 import { StarIcon } from "@chakra-ui/icons";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { deleteFavoriteMovie } from "../../redux/slices/movieFavorite";
 import {
   Card,
   Container,
@@ -16,47 +16,33 @@ import {
   SimpleGrid,
 } from "@chakra-ui/react";
 import NavbarWeb from "../../components/Navbar";
+import { Link } from "react-router-dom";
 
-const UpcomingMovies = () => {
-  const [data, setData] = useState();
-  const [loading, setLoading] = useState(true);
+const FavoriteMovie = () => {
+  const movies = useSelector((state) => state.movies.movies);
+  const dispatch = useDispatch();
 
-  const url =
-    "https://api.themoviedb.org/3/movie/upcoming?language=en-US&page=1";
-  const options = {
-    method: "GET",
-    headers: {
-      accept: "application/json",
-      Authorization: process.env.REACT_APP_AUTHORIZATION,
-    },
+  const handleDeleteFavoriteMovie = (id) => {
+    dispatch(deleteFavoriteMovie({ id }));
   };
-
-  fetch(url, options)
-    .then((res) => res.json())
-    .then((json) => {
-      setData(json.results);
-      setLoading(false);
-    })
-    .catch((err) => console.error("error:" + err));
-
   return (
     <>
       <NavbarWeb />
-      {loading ? (
-        <Spinner color="red.500" />
+      {movies.length < 1 ? (
+        <h1>Movie Favorite Tidak Tersedia</h1>
       ) : (
         <>
           <Text fontSize="2xl" align="center" pt="10px">
-            Upcoming Movie
+            Popular Movie
           </Text>
           <Container maxW="container.xl">
             <SimpleGrid
               justifyContent="space-between"
               columns={{ sm: 1, md: 2, lg: 3 }}
             >
-              {data.map((movie, index) => {
+              {movies.map((movie) => {
                 return (
-                  <Card maxW="sm" key={index} bg="#63646D" mt="20px">
+                  <Card maxW="sm" key={movie.id} bg="#63646D" mt="20px">
                     <Image
                       src={`https://image.tmdb.org/t/p/w780/${movie.poster_path}`}
                       alt={movie.title}
@@ -85,6 +71,17 @@ const UpcomingMovies = () => {
                             Detail
                           </Link>
                         </Button>
+                        <Button
+                          variant="solid"
+                          colorScheme="red"
+                          _hover={{
+                            background: "white",
+                            color: "red.600",
+                          }}
+                          onClick={() => handleDeleteFavoriteMovie(movie.id)}
+                        >
+                          Hapus
+                        </Button>
                       </ButtonGroup>
                     </CardFooter>
                   </Card>
@@ -98,4 +95,4 @@ const UpcomingMovies = () => {
   );
 };
 
-export default UpcomingMovies;
+export default FavoriteMovie;

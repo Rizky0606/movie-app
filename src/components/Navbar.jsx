@@ -2,17 +2,20 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 // import { useState } from "react";
-// import { Input } from "@chakra-ui/react";
-// import { Search2Icon } from "@chakra-ui/icons";
-// import SearchMovie from "../source/Movies/SearchMovie";
+import { Input } from "@chakra-ui/react";
+import { Search2Icon } from "@chakra-ui/icons";
+import SearchMovie from "../source/Movies/SearchMovie";
 
 const NavbarWeb = () => {
-  // const navigate = useNavigate();
-  // const [keyword, setKeyword] = useState("");
+  const navigate = useNavigate();
 
-  // SearchMovie(keyword);
+  const search = (q) => {
+    const query = SearchMovie(q);
+    console.log(query);
+  };
+
   return (
     <>
       <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
@@ -40,6 +43,9 @@ const NavbarWeb = () => {
                 <NavDropdown.Item>
                   <Link to="/movie/trending-movies">Trending</Link>
                 </NavDropdown.Item>
+                <NavDropdown.Item>
+                  <Link to="/movie/favorite-movie">Favorite</Link>
+                </NavDropdown.Item>
               </NavDropdown>
 
               {/* Dropdown Series */}
@@ -55,20 +61,21 @@ const NavbarWeb = () => {
                 </NavDropdown.Item>
               </NavDropdown>
             </Nav>
-            {/* <Input
+
+            <Input
               color="white"
               w="30%"
               ml="30px"
               alignItems="end"
               placeholder="Cari Film Disini ..."
-              onChange={(e) => setKeyword(e.target.value)}
+              onChange={({ target }) => search(target.value)}
             />
             <Search2Icon
               color="white"
               boxSize={5}
               ml="10px"
               onClick={() => navigate("/search-movie")}
-            /> */}
+            />
           </Navbar.Collapse>
         </Container>
       </Navbar>

@@ -2,6 +2,8 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { Spinner } from "@chakra-ui/react";
 import { StarIcon, ChevronLeftIcon } from "@chakra-ui/icons";
+import { useDispatch } from "react-redux";
+import { addFavoriteMovie } from "../../redux/slices/movieFavorite";
 import {
   Card,
   Container,
@@ -10,6 +12,9 @@ import {
   Heading,
   Text,
   CardBody,
+  Button,
+  Alert,
+  AlertIcon,
 } from "@chakra-ui/react";
 import NavbarWeb from "../../components/Navbar";
 
@@ -19,6 +24,8 @@ const DetailMovies = () => {
   const [loading, setLoading] = useState(true);
   const apiKey = process.env.REACT_APP_API_KEY;
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  // let genreList = [];
 
   const options = {
     method: "GET",
@@ -38,6 +45,23 @@ const DetailMovies = () => {
       setLoading(false);
     })
     .catch((err) => console.error("error:" + err));
+
+  // const movieData = {
+  //   id: params.id,
+  //   title: data.title,
+  //   popularity: data.popularity,
+  //   voteAverage: data.vote_average,
+  //   releaseDate: data.release_date,
+  //   overview: data.overview,
+  // };
+
+  const handleClickFavorite = () => {
+    <Alert status="success">
+      <AlertIcon />
+      Data uploaded to the server. Fire on!
+    </Alert>;
+    dispatch(addFavoriteMovie(data));
+  };
 
   return (
     <>
@@ -80,6 +104,13 @@ const DetailMovies = () => {
                 </Stack>
               </CardBody>
             </Card>
+            <Button
+              onClick={() => handleClickFavorite()}
+              variant="outline"
+              colorScheme="teal"
+            >
+              Tambah ke Favorite
+            </Button>
           </Container>
         </>
       )}

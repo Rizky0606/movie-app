@@ -55,16 +55,16 @@ const TopRated = () => {
             >
               {data.map((series, index) => {
                 return (
-                  <Card maxW="sm" key={index} bg="gray.200" mt="20px">
+                  <Card maxW="sm" key={index} bg="#63646D" mt="20px">
                     <Image
                       src={`https://image.tmdb.org/t/p/w780/${series.poster_path}`}
                       alt={series.name}
                       borderRadius="lg"
                     />
-                    <Stack p="10px" mt="6" spacing="3">
+                    <Stack color="#eee" p="10px" mt="6" spacing="3">
                       <Heading size="md">{series.name}</Heading>
                       <Text noOfLines={4}>{series.overview}</Text>
-                      <Text color="blue.600" fontSize="2xl">
+                      <Text fontSize="2xl">
                         <StarIcon boxSize={5} mr={2} />
                         {series.vote_average}
                       </Text>
