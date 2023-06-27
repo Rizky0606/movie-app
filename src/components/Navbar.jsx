@@ -2,19 +2,19 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 // import { useState } from "react";
-import { Input } from "@chakra-ui/react";
-import { Search2Icon } from "@chakra-ui/icons";
-import SearchMovie from "../source/Movies/SearchMovie";
+// import { Input } from "@chakra-ui/react";
+// import { Search2Icon } from "@chakra-ui/icons";
+// import SearchMovie from "../source/Movies/SearchMovie";
 
 const NavbarWeb = () => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
-  const search = (q) => {
-    const query = SearchMovie(q);
-    console.log(query);
-  };
+  // const search = (q) => {
+  //   const query = SearchMovie(q);
+  //   console.log(query);
+  // };
 
   return (
     <>
@@ -62,7 +62,7 @@ const NavbarWeb = () => {
               </NavDropdown>
             </Nav>
 
-            <Input
+            {/* <Input
               color="white"
               w="30%"
               ml="30px"
@@ -75,7 +75,7 @@ const NavbarWeb = () => {
               boxSize={5}
               ml="10px"
               onClick={() => navigate("/search-movie")}
-            />
+            /> */}
           </Navbar.Collapse>
         </Container>
       </Navbar>

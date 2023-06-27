@@ -17,13 +17,50 @@ import {
 } from "@chakra-ui/react";
 import NavbarWeb from "../../components/Navbar";
 import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const FavoriteMovie = () => {
   const movies = useSelector((state) => state.movies.movies);
   const dispatch = useDispatch();
 
   const handleDeleteFavoriteMovie = (id) => {
-    dispatch(deleteFavoriteMovie({ id }));
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        confirmButton: "btn btn-success",
+        cancelButton: "btn btn-danger",
+      },
+      buttonsStyling: false,
+    });
+
+    swalWithBootstrapButtons
+      .fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Yes, delete it!",
+        cancelButtonText: "No, cancel!",
+        reverseButtons: true,
+      })
+      .then((result) => {
+        if (result.isConfirmed) {
+          swalWithBootstrapButtons.fire(
+            "Hapus!",
+            "Berhasil Menghapus Favorite Movie",
+            "success"
+          );
+          dispatch(deleteFavoriteMovie({ id }));
+        } else if (
+          /* Read more about handling dismissals below */
+          result.dismiss === Swal.DismissReason.cancel
+        ) {
+          swalWithBootstrapButtons.fire(
+            "Cancelled",
+            "Your imaginary file is safe :)",
+            "error"
+          );
+        }
+      });
   };
   return (
     <>

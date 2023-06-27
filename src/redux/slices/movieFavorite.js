@@ -25,6 +25,7 @@ const movieFavorite = createSlice({
         overview,
         poster_path,
       });
+      // localStorage.setItem("movies", JSON.stringify(state.movies));
     },
     deleteFavoriteMovie: (state, action) => {
       const { id } = action.payload;

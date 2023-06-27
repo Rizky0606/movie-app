@@ -11,12 +11,10 @@ import {
   Stack,
   Heading,
   Text,
-  CardBody,
   Button,
-  Alert,
-  AlertIcon,
 } from "@chakra-ui/react";
 import NavbarWeb from "../../components/Navbar";
+import Swal from "sweetalert2";
 
 const DetailMovies = () => {
   const params = useParams();
@@ -46,20 +44,14 @@ const DetailMovies = () => {
     })
     .catch((err) => console.error("error:" + err));
 
-  // const movieData = {
-  //   id: params.id,
-  //   title: data.title,
-  //   popularity: data.popularity,
-  //   voteAverage: data.vote_average,
-  //   releaseDate: data.release_date,
-  //   overview: data.overview,
-  // };
-
   const handleClickFavorite = () => {
-    <Alert status="success">
-      <AlertIcon />
-      Data uploaded to the server. Fire on!
-    </Alert>;
+    Swal.fire({
+      position: "top-end",
+      icon: "success",
+      title: "Movie berhasil ditambahkan",
+      showConfirmButton: false,
+      timer: 1500,
+    });
     dispatch(addFavoriteMovie(data));
   };
 
@@ -84,30 +76,30 @@ const DetailMovies = () => {
           />
           <Container maxW="container.xl">
             <Card mt="20px">
-              <CardBody>
-                <Image
-                  w="100%"
-                  objectFit="cover"
-                  src={`https://image.tmdb.org/t/p/w780/${data.backdrop_path}`}
-                  alt={data.original_title}
-                  borderRadius="lg"
-                />
-                <Stack mt="6" spacing="3">
-                  <Heading size="md">{data.title}</Heading>
-                  <Text color="blue.600" fontSize="2xl">
-                    <StarIcon boxSize={5} mr={2} />
-                    {data.vote_average}
-                  </Text>
-                  <Text>{data.popularity}</Text>
-                  <Text>{data.release_date}</Text>
-                  <Text>{data.overview}</Text>
-                </Stack>
-              </CardBody>
+              <Image
+                w="100%"
+                objectFit="cover"
+                src={`https://image.tmdb.org/t/p/w780/${data.backdrop_path}`}
+                alt={data.original_title}
+                borderRadius="lg"
+              />
+              <Stack m="15px" spacing="3">
+                <Heading size="md">{data.title}</Heading>
+                <Text color="blue.600" fontSize="2xl">
+                  <StarIcon boxSize={5} mr={2} />
+                  {data.vote_average}
+                </Text>
+                <Text>{data.popularity}</Text>
+                <Text>{data.release_date}</Text>
+                <Text>{data.overview}</Text>
+              </Stack>
             </Card>
             <Button
               onClick={() => handleClickFavorite()}
-              variant="outline"
+              variant="solid"
               colorScheme="teal"
+              mt="20px"
+              mb="20px"
             >
               Tambah ke Favorite
             </Button>
